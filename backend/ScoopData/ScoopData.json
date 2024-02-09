@@ -1,0 +1,72 @@
+[
+    {
+        "Id": "AUPM420",
+        "Flavour": "Horse Meat",
+        "Ingredient": "Horse Meat",
+        "Origin": "Japan",
+        "Rating": "6"
+    },
+    {
+        "Id": "AUPM421",
+        "Flavour": "Spaghetti & Cheese",
+        "Ingredient": "Spaghetti, Cheese",
+        "Origin": "Germany",
+        "Rating": "5"
+    },
+    {
+        "Id": "AUPM422",
+        "Flavour": "Wasabi",
+        "Ingredient": "Wasabi",
+        "Origin": "Japan",
+        "Rating": "6"
+    },
+    {
+        "Id": "AUPM423",
+        "Flavour": "Bacon Maple",
+        "Ingredient": "Bacon bits, Maple Syrup",
+        "Origin": "USA",
+        "Rating": "7"
+    },
+    {
+        "Id": "AUPM424",
+        "Flavour": "Lavender Honey",
+        "Ingredient": "Lavender Extract, Honey",
+        "Origin": "France",
+        "Rating": "9"
+    },
+    {
+        "Id": "AUPM425",
+        "Flavour": "Durian",
+        "Ingredient": "Durian Chunks",
+        "Origin": "Malaysia",
+        "Rating": "8"
+    },
+    {
+        "Id": "AUPM426",
+        "Flavour": "Charcoal",
+        "Ingredient": "Charcoal",
+        "Origin": "Japan",
+        "Rating": "7"
+    },
+    {
+        "Id": "AUPM427",
+        "Flavour": "Balsamic Strawberry Basil",
+        "Ingredient": "Balsamic Vinegar, fresh Strawberry, fresh Basi",
+        "Origin": "Italy",
+        "Rating": "8"
+    },
+    {
+        "Id": "AUPM428",
+        "Flavour": "Saffron Cardamom Rose",
+        "Ingredient": "Saffron Threads, cardamom, rose water",
+        "Origin": "Middle East/India",
+        "Rating": "9"
+    },
+    {
+        "Id": "AUPM429",
+        "Flavour": "Everything Bagel",
+        "Ingredient": "Bagel",
+        "Origin": "USA",
+        "Rating": "8"
+    }
+]
