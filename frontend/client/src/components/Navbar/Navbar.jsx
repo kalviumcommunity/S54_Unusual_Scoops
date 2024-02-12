@@ -34,6 +34,7 @@ export default function Navbar () {
           width='50vw'
         >
             <Button
+              colorScheme='pink'
               as="a"
               variant="ghost"
               aria-label="Home"
@@ -45,6 +46,7 @@ export default function Navbar () {
 
   
             <Button
+              colorScheme='pink'
               as="a"
               variant="ghost"
               aria-label="About"
@@ -55,6 +57,7 @@ export default function Navbar () {
             </Button>
 
             <Button
+              colorScheme='pink'
               as="a"
               variant="ghost"
               aria-label="Contact"
@@ -65,6 +68,7 @@ export default function Navbar () {
             </Button>
             
             <Button
+            colorScheme='pink'
             as="a"
             variant="ghost"
             aria-label='contact'
@@ -124,6 +128,7 @@ export default function Navbar () {
         >
 
             <Button
+              colorScheme='pink'
               as="a"
               variant="ghost"
               aria-label="Home"
@@ -134,6 +139,7 @@ export default function Navbar () {
             </Button>
 
             <Button
+              colorScheme='pink'
               as="a"
               variant="ghost"
               aria-label="About"
@@ -146,6 +152,7 @@ export default function Navbar () {
 
        
             <Button
+              colorScheme='pink'
               as="a"
               variant="ghost"
               aria-label="Contact"
