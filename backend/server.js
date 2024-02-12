@@ -1,9 +1,13 @@
 const express = require("express");
 const DBconnection = require("./DBconnection/DBconnection");
 const app = express()
-const { connection, default: mongoose } = require("mongoose")
+const { connection, default: mongoose } = require("mongoose");
+const router = require("./routes/route");
 const port = process.env.PORT || 3000;
-const dotenv = require('dotenv').config()
+
+app.use(express.json())
+
+app.use('/api',router)
 
 DBconnection()
 
