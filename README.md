@@ -2,6 +2,7 @@
 
 ### Render Deployed Link : https://unusualscoops.onrender.com
 
+### Vercel Deployed Link : https://asap-unusual-scoops.vercel.app
 ---
 ## Project Overview : 
 ---
