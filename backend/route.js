@@ -11,8 +11,8 @@ const validateRequest = (req, res, next) => {
   if (error) {
       return res.status(400).json({ error: error.details[0].message });
   }
-  res.send("Data got validated successfully ")
   next();
+  res.send("Data got validated successfully ");
 };
 
 
