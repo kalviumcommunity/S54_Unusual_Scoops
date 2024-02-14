@@ -1,8 +1,8 @@
 const express = require("express");
-const DBconnection = require("./DBconnection/DBconnection");
+const DBconnection = require("./DBconnection");
 const app = express()
 const { connection, default: mongoose } = require("mongoose");
-const router = require("./routes/route");
+const router = require("./route");
 const port = process.env.PORT || 3000;
 
 app.use(express.json())

@@ -1,22 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import wasabiPic from '../../Assets/wasabi.png'
 import ratingImg from '../../Assets/ratingIcon.png'
+import axios from 'axios'
 import {
     Box,
     SimpleGrid,
-    GridItem,
-    Grid,
     Text,
-    useColorMode,
-    Switch,
     Flex,
-    Button,
-    IconButton,
     Image
   } from '@chakra-ui/react'
-  import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+
 
 const Content = () => {
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(''); 
+        console.log(response.data)
+      } catch (error) {
+        console.error(error)
+      }
+    };
+    fetchData(); 
+  }, []);
+
   return (
     <>
       <Flex
@@ -40,7 +48,7 @@ const Content = () => {
       justifyContent="center"
       mt="14vh">
         <SimpleGrid columns={3} spacingX='15vw' spacingY='15vh'>
-          <Box bg='#ff5f96' width='16vw' borderRadius='50px' padding='2vw' boxShadow ='#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px' border='6px solid black'>
+          <Box _hover={{boxShadow :'#ffee6e -8px 4px 0 2px,black -8px 4px 0 8px'}} bg='#ff5f96' width='16vw' borderRadius='50px' padding='2vw' boxShadow ='#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px' border='6px solid black'>
             <Image src={wasabiPic} borderRadius='25px' width='15vw'></Image>
             <Text fontSize='20px'as='b'>Wasabi Ice Cream</Text>
             <Text fontSize='18px' as='b'> Origin : Japan</Text>
@@ -51,7 +59,7 @@ const Content = () => {
               <Image src={ratingImg} width='30px'></Image>
             </Flex>
           </Box>
-          <Box bg='#ff5f96' width='16vw' borderRadius='50px' padding='2vw' boxShadow ='#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px' border='6px solid black'>
+          <Box _hover={{boxShadow :'#ffee6e -8px 4px 0 2px,black -8px 4px 0 8px'}} bg='#ff5f96' width='16vw' borderRadius='50px' padding='2vw' boxShadow ='#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px' border='6px solid black'>
             <Image src={wasabiPic} borderRadius='25px' width='15vw'></Image>
             <Text fontSize='20px'as='b'>Wasabi Ice Cream</Text>
             <Text fontSize='18px' as='b'> Origin : Japan</Text>
@@ -62,7 +70,7 @@ const Content = () => {
               <Image src={ratingImg} width='30px'></Image>
             </Flex>
           </Box>
-          <Box bg='#ff5f96' width='16vw' borderRadius='50px' padding='2vw' boxShadow ='#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px' border='6px solid black'>
+          <Box _hover={{boxShadow :'#ffee6e -8px 4px 0 2px,black -8px 4px 0 8px'}} bg='#ff5f96' width='16vw' borderRadius='50px' padding='2vw' boxShadow ='#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px' border='6px solid black'>
             <Image src={wasabiPic} borderRadius='25px' width='15vw'></Image>
             <Text fontSize='20px'as='b'>Wasabi Ice Cream</Text>
             <Text fontSize='18px' as='b'> Origin : Japan</Text>
