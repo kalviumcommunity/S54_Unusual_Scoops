@@ -37,12 +37,10 @@ router.get('/:id',async (req,res)=>{
 
 router.post('/',validateRequest,async(req,res)=>{
     const Scoop = new Scoop({
-        title : req.body.title,
-        description : req.body.description,
+        name : req.body.name,
+        origin : req.body.origin,
+        rating : req.body.rating,
         image : req.body.image,
-        video : req.body.video,
-        failRating : req.body.failRating,
-        Location : req.body.Location
     })
 
     try {
@@ -59,9 +57,9 @@ router.patch('/:id',validateRequest,async(req,res)=>{
         if (!Scoop) {
             return res.status(404).json({ error: 'Scoop not found' });
           }
-        Scoop.title = req.body.title
+        Scoop.name = req.body.name
+        Scoop.rating = req.body.rating
         Scoop.image = req.body.image  
-        Scoop.failRating = req.body.failRating
         const s1 = await Scoop.save()
         res.json(s1)
     } catch (error) {
