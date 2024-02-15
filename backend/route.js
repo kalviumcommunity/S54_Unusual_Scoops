@@ -5,7 +5,7 @@ const ScoopData = require('./Schema');
 // Get all Scoops
 router.get('/', async (req, res) => {
   try {
-    const Scoops = await ScoopData.find({});
+    const Scoops = await ScoopData.find();
     console.log(Scoops)
     res.json(Scoops);
   } catch (error) {
@@ -54,7 +54,7 @@ router.patch('/:id', async (req, res) => {
     Scoop.name = req.body.name;
     Scoop.rating = req.body.rating;
     Scoop.image = req.body.image;
-
+x
     const s1 = await Scoop.save();
     res.json(s1);
   } catch (error) {

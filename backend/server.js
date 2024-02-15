@@ -4,8 +4,10 @@ const app = express();
 const mongoose = require("mongoose");
 const router = require("./route");
 const port = process.env.PORT || 3000;
+const cors = require('cors')
 
 app.use(express.json());
+app.use(cors())
 
 DBconnection().then(() => {
     console.log("Database Connected")
