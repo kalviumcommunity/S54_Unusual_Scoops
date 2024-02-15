@@ -9,6 +9,7 @@ import {
   Image
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
+import { Link } from 'react-router-dom'
 
 export default function Navbar () {
   const { colorMode, toggleColorMode } = useColorMode()
@@ -18,11 +19,11 @@ export default function Navbar () {
     <Flex> 
       <Flex
         width= "100%"
-        position="fixed"
-        top="1rem"
-        right="1rem"
+        position="absolute"
+        padding='1%'
         align="center"
         justifyContent={'space-between'}
+        right='2rem'
       >
         <Image src={logo}
         boxSize={'20'}
@@ -32,7 +33,7 @@ export default function Navbar () {
         <Flex
           display={['none', 'none', 'flex','flex']}
           width='50vw'
-        >
+        >   
             <Button
               colorScheme='pink'
               as="a"
@@ -40,11 +41,12 @@ export default function Navbar () {
               aria-label="Home"
               my={5}
               w="100%"
-            >
-              Home
+              fontSize='xl'
+            ><Link to='/'>
+              Home</Link>
             </Button>
-
-  
+            
+            
             <Button
               colorScheme='pink'
               as="a"
@@ -52,10 +54,12 @@ export default function Navbar () {
               aria-label="About"
               my={5}
               w="100%"
-            >
-              About
-            </Button>
+              fontSize='xl'
 
+            ><Link to="/about">
+              About</Link>
+            </Button>
+            
             <Button
               colorScheme='pink'
               as="a"
@@ -63,8 +67,10 @@ export default function Navbar () {
               aria-label="Contact"
               my={5}
               w="100%"
-            >
-              Contact
+              fontSize='xl'
+
+            ><Link to='/contact'>
+              Contact</Link>
             </Button>
             
             <Button
@@ -74,6 +80,8 @@ export default function Navbar () {
             aria-label='contact'
             my={5}
             w='100%'
+            fontSize='xl'
+            href='https://www.buymeacoffee.com/AbhinavRajeshXD'
             >
                 Buy Me a Coffee
             </Button>
