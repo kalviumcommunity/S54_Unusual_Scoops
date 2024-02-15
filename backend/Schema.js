@@ -5,6 +5,10 @@ const scoopsSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    ingredient: {
+        type: String,
+        required: true,
+    },
     origin: {
         type: String,
         required: true,
