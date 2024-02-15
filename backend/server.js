@@ -8,21 +8,23 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 DBconnection().then(() => {
-    app.use("/api", router);
+    console.log("Database Connected")
+});
 
-    app.get("/", (req, res) => {
-        res.send(
-            mongoose.connection.readyState === 1
-                ? "Database Connected"
-                : "Database Disconnected"
-        );
-    });
+app.use("/api", router);
 
-    app.get("/ping", (req, res) => {
-        res.send("pong");
-    });
+app.get("/", (req, res) => {
+    res.send(
+        mongoose.connection.readyState === 1
+            ? "Database Connected"
+            : "Database Disconnected"
+    );
+});
 
-    app.listen(port, () => {
-        console.log(`The server is running on ${port}`);
-    });
+app.get("/ping", (req, res) => {
+    res.send("pong");
+});
+
+app.listen(port, () => {
+    console.log(`The server is running on ${port}`);
 });

@@ -1,86 +1,78 @@
 const express = require('express');
-const router = express.Router()
-const app = express();
-app.use(express.json())
-const validation = require('./joi.js')
-const mongoose = require('mongoose');
-const Scoop = require('./Schema.js')
+const router = express.Router();
+const ScoopData = require('./Schema');
 
-const validateRequest = (req, res, next) => {
-  const { error } = validation.validate(req.body);
-  if (error) {
-      return res.status(400).json({ error: error.details[0].message });
+// Get all Scoops
+router.get('/', async (req, res) => {
+  try {
+    const Scoops = await ScoopData.find({});
+    console.log(Scoops)
+    res.json(Scoops);
+  } catch (error) {
+    res.status(500).json({ error: error.message});
   }
-  next();
-  res.send("Data got validated successfully ");
-};
+});
 
-
-router.get('/',async (req,res)=>{
-    try{
-    const data = await Scoop.find({})
-    res.json(data)
-    console.log("get request")
-    }catch(err){
-        res.send('err'+err)
+// Get a single Scoop
+router.get('/:id', async (req, res) => {
+  try {
+    const Scoop = await ScoopData.findById(req.params.id);
+    if (!Scoop) {
+      return res.status(404).json({ error: 'Scoop not found'});
     }
-})
+    res.json(Scoop);
+  } catch (error) {
+    res.status(500).json({ error: error.message});
+  }
+});
 
-router.get('/:id',async (req,res)=>{
-    try{
-    const Scoop = await Scoop.findById(req.params.id)
-    res.json(Scoop)
-    }catch(err){
-        res.send('err'+err)
+// Create a new Scoop
+router.post('/', async (req, res) => {
+  try {
+    const Scoop = new ScoopData({
+      name: req.body.name,
+      origin: req.body.origin,
+      rating: req.body.rating,
+      image: req.body.image,
+    });
+
+    const s1 = await Scoop.save();
+    res.json(s1);
+  } catch (error) {
+    res.status(500).json({ error: error.message});
+  }
+});
+
+// Update a Scoop
+router.patch('/:id', async (req, res) => {
+  try {
+    const Scoop = await ScoopData.findById(req.params.id);
+    if (!Scoop) {
+      return res.status(404).json({ error: 'Scoop not found'});
     }
-})
 
-router.post('/',validateRequest,async(req,res)=>{
-    const Scoop = new Scoop({
-        name : req.body.name,
-        origin : req.body.origin,
-        rating : req.body.rating,
-        image : req.body.image,
-    })
+    Scoop.name = req.body.name;
+    Scoop.rating = req.body.rating;
+    Scoop.image = req.body.image;
 
-    try {
-        const s1 = await Scoop.save()
-        res.json(s1)
-    } catch (error) {
-        
+    const s1 = await Scoop.save();
+    res.json(s1);
+  } catch (error) {
+    res.status(500).json({ error: error.message});
+  }
+});
+
+// Delete a Scoop
+router.delete('/:id', async (req, res) => {
+  try {
+    const Scoop = await ScoopData.findByIdAndDelete(req.params.id);
+    if (!Scoop) {
+      return res.status(404).json({ error: 'Scoop not found'});
     }
-})
+    res.status(200).json({ message: 'Scoop deleted successfully'});
+  } catch (error) {
+    res.status(500).json({ error: error.message});
+  }
+});
 
-router.patch('/:id',validateRequest,async(req,res)=>{
-    try {
-        const Scoop = await Scoop.findById(req.params.id)
-        if (!Scoop) {
-            return res.status(404).json({ error: 'Scoop not found' });
-          }
-        Scoop.name = req.body.name
-        Scoop.rating = req.body.rating
-        Scoop.image = req.body.image  
-        const s1 = await Scoop.save()
-        res.json(s1)
-    } catch (error) {
-        res.send('Err' + error)
-    }
-})
-
-router.delete('/:id',validateRequest, async (req, res) => {
-    try {
-      const Scoop = await Scoop.findByIdAndDelete(req.params.id);
-    //   res.status(201).send(Scoop)
-      if (!Scoop) {
-        return res.status(404).json({ error: 'Scoop not found' });
-      }
-    //   await Scoop.remove();
-      res.json({ message: 'Scoop deleted successfully' });
-    } catch (error) {
-      res.status(500).json({ error: error.message });
-    }
-  });
-
-
-
-module.exports = router
+module.exports = router;
