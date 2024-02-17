@@ -23,4 +23,4 @@ const scoopsSchema = new mongoose.Schema({
 })
 
 const Scoop = new mongoose.model("scoopdatas", scoopsSchema)
-module.exports = Scoop
+module.exports = Scoop 

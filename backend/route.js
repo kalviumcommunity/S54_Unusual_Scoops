@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
   try {
     const Scoop = new ScoopData({
       name: req.body.name,
+      ingredient: req.body.ingredient,
       origin: req.body.origin,
       rating: req.body.rating,
       image: req.body.image,
