@@ -5,6 +5,7 @@ import Content from './Content/Content'
 import NoPage from './ErrorPage'
 import About from './About/About'
 import Contact from './Contact/Contact'
+import InsertScoop from './crud/InsertScoop'
 
 
 const AllRoutes = () => {
@@ -16,6 +17,7 @@ const AllRoutes = () => {
             {/* <Route path='/registerForm' element={<RegisterForm />} /> */}
             <Route path="*" element={<NoPage />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/post" element={<InsertScoop/>} />
         </Routes>
     </>
   )

@@ -102,6 +102,7 @@ export default function Navbar () {
             isChecked={isDark}
             onChange={toggleColorMode}
         />
+        <Button><Link to='/post'>POST</Link></Button>
       </Flex>
 
       {/* Mobile Content */}
