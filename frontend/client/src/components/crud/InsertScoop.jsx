@@ -13,12 +13,15 @@ import {
   Button,
   Heading,
   Text,
-  Flex
+  Flex,
+  Toast
 } from '@chakra-ui/react';
 
 import axios from 'axios';
 import { ArrowLeftIcon } from '@chakra-ui/icons';
 import { Link, redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useToast } from '@chakra-ui/react';
 
 const InsertScoop = () => {    
   const [input, setInput] = useState('');
@@ -26,6 +29,9 @@ const InsertScoop = () => {
   const [origin, setOrigin] = useState('');
   const [link, setLink] = useState('');
   const [rating, setRating] = useState('');
+  const navigate = useNavigate();
+  const toast = useToast();
+
   // const Redirect = redirect()
     const data = {
     "name" : input ,
@@ -34,20 +40,34 @@ const InsertScoop = () => {
     "rating" : rating,
     "image" : link 
     }
-  const SubmitPost = (e) => {
-    e.preventDefault();
-    const postScoop = async () => {
+    const SubmitPost = async (e) => {
+      e.preventDefault();
       try {
-        await axios.post('https://unusualscoops.onrender.com/api/',data);
-        console.log(data)
+        await axios.post('https://unusualscoops.onrender.com/api/', data);
+        console.log(data);
         console.log('Scoop posted successfully!');
-        redirect('/')
+        toast({
+          title: 'Scoop posted successfully!',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top-right', 
+        });
+        navigate('/');
       } catch (err) {
         console.error('Error posting scoop:', err);
+        toast({
+          title: 'Error posting scoop',
+          description: 'An error occurred while posting the scoop. Please try again later.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top-right', 
+        });
       }
     };
-    postScoop();
-  };
+    
+    
 
   const handleInputChange = (e) => setInput(e.target.value);
   const handleIngredientChange = (e) => setIngredient(e.target.value);
