@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 
 const scoopsSchema = new mongoose.Schema({
-    Flavour: {
+    name: {
         type: String,
         required: true,
     },
-    Ingredient: {
+    ingredient: {
         type: String,
         required: true,
     },
-    Origin: {
+    origin: {
         type: String,
         required: true,
     },
-    Rating: {
+    rating: {
         type: Number,
     },
     image: {

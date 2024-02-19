@@ -16,6 +16,7 @@ export default function Navbar () {
   const isDark = colorMode === 'dark'
   const [display, changeDisplay] = useState('none')
   return (
+    <>
     <Flex> 
       <Flex
         width= "100%"
@@ -98,11 +99,15 @@ export default function Navbar () {
           onClick={() => changeDisplay('flex')}
           display={['flex', 'flex', 'none', 'none']}
         />
+        <Button 
+        colorScheme='pink'
+        as="a"
+        variant="ghost"><Link to='/post'>POST</Link></Button>
         <Switch
             isChecked={isDark}
             onChange={toggleColorMode}
         />
-        <Button><Link to='/post'>POST</Link></Button>
+        
       </Flex>
 
       {/* Mobile Content */}
@@ -174,5 +179,6 @@ export default function Navbar () {
         </Flex>
       </Flex>
     </Flex>
+    </>
   )
 }

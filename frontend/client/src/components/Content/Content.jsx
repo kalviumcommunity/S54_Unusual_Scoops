@@ -58,14 +58,14 @@ const Content = () => {
             >
               <Image src={scoop.image} borderRadius="25px" width="15vw" height="25vh" /><br />
               <Text fontSize="20px" as="b">
-                {scoop.Flavour}
+                {scoop.name}
               </Text> <br />
               <Text fontSize="18px" as="b">
-                Origin: {scoop.Origin}
+                Origin: {scoop.origin}
               </Text>
               <Flex align="center" justifyContent='flex-end'>
                 <Text fontSize="30px" as="b" ml="2">
-                  {scoop.Rating}
+                  {scoop.rating}
                 </Text>
                 <Image src={ratingImg} width="30px" />
               </Flex>

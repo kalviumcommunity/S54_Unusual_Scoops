@@ -12,7 +12,8 @@ import {
   NumberDecrementStepper,
   Button,
   Heading,
-  Text
+  Text,
+  Flex
 } from '@chakra-ui/react';
 
 import axios from 'axios';
@@ -27,10 +28,10 @@ const InsertScoop = () => {
   const [rating, setRating] = useState('');
   // const Redirect = redirect()
     const data = {
-    "Flavour" : input ,
-    "Ingredient" : ingredient,
-    "Origin" : input,
-    "Rating" : rating,
+    "name" : input ,
+    "ingredient" : ingredient,
+    "origin" : origin,
+    "rating" : rating,
     "image" : link 
     }
   const SubmitPost = (e) => {
@@ -40,8 +41,7 @@ const InsertScoop = () => {
         await axios.post('https://unusualscoops.onrender.com/api/',data);
         console.log(data)
         console.log('Scoop posted successfully!');
-
-        
+        redirect('/')
       } catch (err) {
         console.error('Error posting scoop:', err);
       }
@@ -58,30 +58,31 @@ const InsertScoop = () => {
   const isError = input === '';
 
   return (
-    <div>
+    <Flex
+    justifyContent='center' marginTop='8%'> 
       <FormControl  color="black" isInvalid={isError} w={"40vw"} p={"3%"} bgColor={"white"} rounded={"25px"}>
-        <Heading my={"2%"}>New Post </Heading>
+        <Heading color='#b83280' my={"2%"}>New Scoop</Heading>
         <Text>Please Enter the following details</Text>
-        <FormLabel  my={"2%"}>Title</FormLabel>
+        <FormLabel  my={"2%"}>Flavour</FormLabel>
         <Input type="text" value={input} onChange={handleInputChange} />
         {!isError ? (
-          <FormHelperText>Enter the title you'd like your post to have.</FormHelperText>
+          <FormHelperText color='#b83280'>Enter the Flavour you'd like your post to have.</FormHelperText>
         ) : (
-          <FormErrorMessage>Title is required.</FormErrorMessage>
+          <FormErrorMessage>Flavour Name is required.</FormErrorMessage>
         )}
         
         <FormLabel  my={"2%"}>Ingredient</FormLabel>
         <Input type="text" value={ingredient} onChange={handleIngredientChange} />
         {!isError ? (
-          <FormHelperText>Enter the Ingredient you'd like your post to have.</FormHelperText>
+          <FormHelperText color='#b83280'>Enter the Ingredient(s) you'd like your post to have.</FormHelperText>
         ) : (
-          <FormErrorMessage>Ingredient is required.</FormErrorMessage>
+          <FormErrorMessage>Ingredient(s) is required.</FormErrorMessage>
         )}
 
         <FormLabel  my={"2%"}>Origin</FormLabel>
         <Input type="text" value={origin} onChange={handleOriginChange} />
         {!isError ? (
-          <FormHelperText>Enter the Origin you'd like your post to have.</FormHelperText>
+          <FormHelperText color='#b83280'>Enter the Origin you'd like your post to have.</FormHelperText>
         ) : (
           <FormErrorMessage>Origin is required.</FormErrorMessage>
         )}      
@@ -95,20 +96,20 @@ const InsertScoop = () => {
           </NumberInputStepper>
         </NumberInput>
 
-        <FormLabel my={"2%"}>Link</FormLabel>
+        <FormLabel my={"2%"}>Image Link</FormLabel>
         <Input type="text" value={link} onChange={handleLinkChange} />
         {!isError ? (
-          <FormHelperText>Provide the link of the stunt you'd like to add.</FormHelperText>
+          <FormHelperText color='#b83280'>Provide the link of the Scoop you'd like to add.</FormHelperText>
         ) : (
           <FormErrorMessage>Link is required.</FormErrorMessage>
         )}
 
         <Link to={'/'}>
-        <Button className='btn btn3' leftIcon={<ArrowLeftIcon />}>Go Back</Button> &nbsp; &nbsp;
+        <Button colorScheme='pink' leftIcon={<ArrowLeftIcon />}>Go Back</Button> &nbsp; &nbsp;
         </Link>
-        <Button className='btn btn2' my={"2%"} onClick={SubmitPost}>Submit</Button>
+        <Button colorScheme='pink' my={"2%"} onClick={SubmitPost}>Submit</Button>
       </FormControl>
-    </div>
+    </Flex>
   );
 };
 
