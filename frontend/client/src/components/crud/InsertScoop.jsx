@@ -19,7 +19,7 @@ import {
 
 import axios from 'axios';
 import { ArrowLeftIcon } from '@chakra-ui/icons';
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@chakra-ui/react';
 
@@ -32,7 +32,6 @@ const InsertScoop = () => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  // const Redirect = redirect()
     const data = {
     "name" : input ,
     "ingredient" : ingredient,

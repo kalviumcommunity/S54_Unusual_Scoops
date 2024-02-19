@@ -52,12 +52,15 @@ router.patch('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Scoop not found'});
     }
 
+    // Update scoop fields
     Scoop.name = req.body.name;
+    Scoop.ingredient = req.body.ingredient;
+    Scoop.origin = req.body.origin;
     Scoop.rating = req.body.rating;
     Scoop.image = req.body.image;
-x
-    const s1 = await Scoop.save();
-    res.json(s1);
+    // Save updated scoop
+    const updatedScoop = await Scoop.save();
+    res.json(updatedScoop);
   } catch (error) {
     res.status(500).json({ error: error.message});
   }
