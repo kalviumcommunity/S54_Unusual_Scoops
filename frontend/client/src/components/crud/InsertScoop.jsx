@@ -27,10 +27,10 @@ const InsertScoop = () => {
   const [rating, setRating] = useState('');
   // const Redirect = redirect()
     const data = {
-    "name" : input ,
-    "ingredient" : ingredient,
-    "origin" : input,
-    "rating" : rating,
+    "Flavour" : input ,
+    "Ingredient" : ingredient,
+    "Origin" : input,
+    "Rating" : rating,
     "image" : link 
     }
   const SubmitPost = (e) => {
@@ -39,8 +39,9 @@ const InsertScoop = () => {
       try {
         await axios.post('https://unusualscoops.onrender.com/api/',data);
         console.log(data)
-        redirect("/")
         console.log('Scoop posted successfully!');
+
+        
       } catch (err) {
         console.error('Error posting scoop:', err);
       }
