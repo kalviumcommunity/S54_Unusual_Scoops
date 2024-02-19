@@ -6,6 +6,7 @@ import NoPage from './ErrorPage'
 import About from './About/About'
 import Contact from './Contact/Contact'
 import InsertScoop from './crud/InsertScoop'
+import UpdateScoop from './crud/UpdateScoop'
 
 
 const AllRoutes = () => {
@@ -18,6 +19,7 @@ const AllRoutes = () => {
             <Route path="*" element={<NoPage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/post" element={<InsertScoop/>} />
+            <Route path='/update' element={<UpdateScoop />} />
         </Routes>
     </>
   )
