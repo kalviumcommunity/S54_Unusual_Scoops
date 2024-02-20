@@ -45,14 +45,12 @@ router.post('/', async (req, res) => {
 });
 
 // Update a Scoop
-router.patch('/:id', async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const Scoop = await ScoopData.findById(req.params.id);
     if (!Scoop) {
       return res.status(404).json({ error: 'Scoop not found'});
     }
-
-    // Update scoop fields
     Scoop.name = req.body.name;
     Scoop.ingredient = req.body.ingredient;
     Scoop.origin = req.body.origin;
