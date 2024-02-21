@@ -103,6 +103,14 @@ export default function Navbar () {
         colorScheme='pink'
         as="a"
         variant="ghost"><Link to='/post'>POST</Link></Button>
+        <Button 
+        colorScheme='pink'
+        as="a"
+        variant="ghost"><Link to='/login'>LOGIN</Link></Button>
+        <Button 
+        colorScheme='pink'
+        as="a"
+        variant="ghost"><Link to='/signup'>SIGN UP</Link></Button>
         <Switch
             isChecked={isDark}
             onChange={toggleColorMode}

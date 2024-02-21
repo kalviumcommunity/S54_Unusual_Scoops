@@ -7,6 +7,8 @@ import About from './About/About'
 import Contact from './Contact/Contact'
 import InsertScoop from './crud/InsertScoop'
 import UpdateScoop from './crud/UpdateScoop'
+import LoginForm from './User Validation/LoginForm.jsx'
+import SignupForm from './User Validation/Signup'
 
 
 const AllRoutes = () => {
@@ -20,6 +22,8 @@ const AllRoutes = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/post" element={<InsertScoop/>} />
             <Route path='/update' element={<UpdateScoop />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/signup' element={<SignupForm />} />
         </Routes>
     </>
   )
