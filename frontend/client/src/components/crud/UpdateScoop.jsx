@@ -100,6 +100,7 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
   position="relative"
   overflow="hidden"
   _hover={{
+    
     '.update-delete-buttons': {
       opacity: 1,
     }

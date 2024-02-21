@@ -1,5 +1,7 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const Joi = require('joi');
 
+// Define Mongoose schema
 const scoopsSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -20,7 +22,42 @@ const scoopsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-})
+});
 
-const Scoop = new mongoose.model("scoopdatas", scoopsSchema)
-module.exports = Scoop 
+const userSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    }
+});
+
+// Create Mongoose model
+const Scoop = mongoose.model("scoopdatas", scoopsSchema);
+const User =  mongoose.model("userdatas", userSchema)
+
+
+const userValidationSchema = Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required()
+});
+// Joi validation schema
+const scoopsValidationSchema = Joi.object({
+    name: Joi.string().required(),
+    ingredient: Joi.string().required(),
+    origin: Joi.string().required(),
+    rating: Joi.number(),
+    image: Joi.string().required()
+});
+
+// Function to validate data using Joi schema
+function validateScoop(scoop) {
+    return scoopsValidationSchema.validate(scoop);
+}
+function validateSignup(user){
+    return userValidationSchema.validate(user);
+}
+module.exports = { Scoop, validateScoop, validateSignup, User };
