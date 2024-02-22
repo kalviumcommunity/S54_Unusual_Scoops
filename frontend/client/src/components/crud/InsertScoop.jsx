@@ -14,7 +14,8 @@ import {
   Heading,
   Text,
   Flex,
-  Toast
+  Toast,
+  Link as ChakraLink
 } from '@chakra-ui/react';
 
 import axios from 'axios';
@@ -124,7 +125,9 @@ const InsertScoop = () => {
         )}
 
         <Link to={'/'}>
+          <ChakraLink>
         <Button colorScheme='pink' leftIcon={<ArrowLeftIcon />}>Go Back</Button> &nbsp; &nbsp;
+        </ChakraLink>
         </Link>
         <Button colorScheme='pink' my={"2%"} onClick={SubmitPost}>Submit</Button>
       </FormControl>

@@ -17,7 +17,6 @@ const AllRoutes = () => {
         <Routes>
             <Route path='/' element={<Content />} />
             <Route path='/about' element={<About />}></Route>
-            {/* <Route path='/registerForm' element={<RegisterForm />} /> */}
             <Route path="*" element={<NoPage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/post" element={<InsertScoop/>} />

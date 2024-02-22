@@ -1,21 +1,23 @@
 // SignupForm.js
 import React, { useState } from 'react';
-import { FormControl, Input, FormLabel, FormErrorMessage, Button, Heading, Text, Flex, Link as ChakraLink } from '@chakra-ui/react';
+import { FormControl, Input, FormLabel, FormErrorMessage, Button, Heading, Text, Flex, Link as ChakraLink, useToast } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignupForm = () => {
-  const [email, setEmail] = useState('');
+  const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
-
+  const toast = useToast();
+  const navigate = useNavigate()
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
   
     // Basic validation
-    if (!email || !password || !confirmPassword) {
+    if (!username || !password || !confirmPassword) {
       setError('All fields are required');
       return;
     }
@@ -26,17 +28,37 @@ const SignupForm = () => {
     }
   
     try {
-      // Replace this with your signup API call using axios
       const response = await axios.post('http://localhost:3000/api/signup', {
-        email,
+        username,
         password,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-  
       console.log('Signup successful');
+      toast({
+        title: 'Signup successful',
+        description: 'You have successfully signed up.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right'
+      });
+      navigate('/');
     } catch (err) {
       setError('Signup failed. Please try again later.');
       console.error('Signup error:', err);
+      toast({
+        title: 'Signup failed',
+        description: 'Invalid username or password. Please try again.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right' 
+      });
     }
+    
   };
 
   return (
@@ -44,8 +66,8 @@ const SignupForm = () => {
       <FormControl color="black" w={"40vw"} p={"3%"} bgColor={"white"} rounded={"25px"}>
         <Heading color='#b83280' my={"2%"}>Signup</Heading>
         <Text>Please Enter the following details</Text>
-        <FormLabel my={"2%"}>Email</FormLabel>
-        <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <FormLabel my={"2%"}>username</FormLabel>
+        <Input type="username" value={username} onChange={(e) => setusername(e.target.value)} />
         <FormLabel my={"2%"}>Password</FormLabel>
         <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <FormLabel my={"2%"}>Confirm Password</FormLabel>
