@@ -1,19 +1,42 @@
-// LoginForm.js
 import React, { useState } from 'react';
-import { FormControl, Input, FormLabel, FormErrorMessage, Button, Heading, Text, Flex, Link as ChakraLink, useToast } from '@chakra-ui/react';
+import { FormControl, Input, FormLabel, Button, Heading, Text, Flex, Link as ChakraLink, useToast } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Joi from 'joi'; // Import Joi
 
 const LoginForm = () => {
   const [username, setusername] = useState('');
   const [password, setPassword] = useState('');
   const toast = useToast();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
+  // Define Joi schema for validation
+  const schema = Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().required()
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const validation = schema.validate({ username, password }, { abortEarly: false });
+
+    if (validation.error) {
+      // Handle validation error
+      console.error('Validation error:', validation.error);
+      validation.error.details.forEach((error) => {
+        toast({
+          title: 'Validation failed',
+          description: error.message,
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top-right'
+        });
+      });
+      return;
+    }
 
     try {
       const response = await axios.post('http://localhost:3000/api/login', { username, password });
@@ -47,7 +70,7 @@ const LoginForm = () => {
         <Heading color='#b83280' my={"2%"}>Login</Heading>
         <Text>Please Enter the following details</Text>
         <FormLabel my={"2%"}>username</FormLabel>
-        <Input type="username" value={username} onChange={(e) => setusername(e.target.value)} />
+        <Input type="text" value={username} onChange={(e) => setusername(e.target.value)} />
         <FormLabel my={"2%"}>Password</FormLabel>
         <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Button colorScheme='pink' onClick={handleSubmit}>

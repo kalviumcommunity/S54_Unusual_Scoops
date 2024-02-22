@@ -1,9 +1,9 @@
-// SignupForm.js
 import React, { useState } from 'react';
-import { FormControl, Input, FormLabel, FormErrorMessage, Button, Heading, Text, Flex, Link as ChakraLink, useToast } from '@chakra-ui/react';
+import { FormControl, Input, FormLabel, Button, Heading, Text, Flex, Link as ChakraLink, useToast } from '@chakra-ui/react';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Joi from 'joi'; // Import Joi
 
 const SignupForm = () => {
   const [username, setusername] = useState('');
@@ -11,22 +11,30 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
   const toast = useToast();
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
+  // Define Joi schema for validation
+  const schema = Joi.object({
+    username: Joi.string().required(),
+    password: Joi.string().min(8).required(),
+    confirmPassword: Joi.ref('password'),
+  }).with('password', 'confirmPassword');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Basic validation
-    if (!username || !password || !confirmPassword) {
-      setError('All fields are required');
+
+    // Validate using Joi schema
+    const validation = schema.validate({ username, password, confirmPassword }, { abortEarly: false });
+
+    if (validation.error) {
+      // Handle validation error
+      console.error('Validation error:', validation.error);
+      validation.error.details.forEach((error) => {
+        setError(error.message);
+      });
       return;
     }
-  
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-  
+
     try {
       const response = await axios.post('http://localhost:3000/api/signup', {
         username,
@@ -55,10 +63,10 @@ const SignupForm = () => {
         status: 'error',
         duration: 5000,
         isClosable: true,
-        position: 'top-right' 
+        position: 'top-right'
       });
     }
-    
+
   };
 
   return (
@@ -67,8 +75,8 @@ const SignupForm = () => {
         <Heading color='#b83280' my={"2%"}>Signup</Heading>
         <Text>Please Enter the following details</Text>
         <FormLabel my={"2%"}>username</FormLabel>
-        <Input type="username" value={username} onChange={(e) => setusername(e.target.value)} />
-        <FormLabel my={"2%"}>Password</FormLabel>
+        <Input type="text" value={username} onChange={(e) => setusername(e.target.value)} />
+        <FormLabel my={"2%"}>Password (Minimum 8 characters)</FormLabel>
         <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <FormLabel my={"2%"}>Confirm Password</FormLabel>
         <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
