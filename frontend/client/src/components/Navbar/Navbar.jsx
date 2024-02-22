@@ -6,148 +6,184 @@ import {
   Flex,
   Button,
   IconButton,
-  Image
+  Image,
+  Link as ChakraLink
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 
-export default function Navbar () {
+export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const isDark = colorMode === 'dark'
   const [display, changeDisplay] = useState('none')
+  const [isLoggedIn, setIsLoggedIn] = useState(false) // State to track login status
+
+  const handleLogout = () => {
+    // Implement logout logic here, such as clearing user session, removing tokens, etc.
+    setIsLoggedIn(false)
+  }
+
   return (
     <>
-    <Flex> 
-      <Flex
-        width= "100%"
-        position="absolute"
-        padding='1%'
-        align="center"
-        justifyContent={'space-between'}
-        right='2rem'
-      >
-        <Image src={logo}
-        boxSize={'20'}
-        ml='8'
-        />
-        {/* Desktop */}
+      <Flex>
         <Flex
-          display={['none', 'none', 'flex','flex']}
-          width='50vw'
-        >   
-            <Button
-              colorScheme='pink'
-              as="a"
-              variant="ghost"
-              aria-label="Home"
-              my={5}
-              w="100%"
-              fontSize='xl'
-            ><Link to='/'>
-              Home</Link>
-            </Button>
-            
-            
-            <Button
-              colorScheme='pink'
-              as="a"
-              variant="ghost"
-              aria-label="About"
-              my={5}
-              w="100%"
-              fontSize='xl'
+          width="100%"
+          position="absolute"
+          padding='1%'
+          align="center"
+          justifyContent={'space-between'}
+          right='2rem'
+        >
+          <Image src={logo}
+            boxSize={'20'}
+            ml='8'
+          />
+          {/* Desktop */}
+          <Flex
+            display={['none', 'none', 'flex', 'flex']}
+            width='50vw'
+            justifyContent='space-between'
+          >
+            <Link to='/'>
+              <ChakraLink>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label="Home"
+                  my={5}
+                  w="100%"
+                  fontSize='xl'
+                >
+                  Home
+            </Button></ChakraLink></Link>
 
-            ><Link to="/about">
-              About</Link>
-            </Button>
+
+            <Link to="/about">
+              <ChakraLink>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label="About"
+                  my={5}
+                  w="100%"
+                  fontSize='xl'
+                >
+                  About
+            </Button></ChakraLink></Link>
+            <Link to='/contact'>
+              <ChakraLink>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label="Contact"
+                  my={5}
+                  w="100%"
+                  fontSize='xl'
+
+                >
+                  Contact
+            </Button></ChakraLink></Link>
             
             <Button
               colorScheme='pink'
               as="a"
               variant="ghost"
-              aria-label="Contact"
+              aria-label='contact'
               my={5}
-              w="100%"
+              w='20%'
               fontSize='xl'
-
-            ><Link to='/contact'>
-              Contact</Link>
-            </Button>
-            
-            <Button
-            colorScheme='pink'
-            as="a"
-            variant="ghost"
-            aria-label='contact'
-            my={5}
-            w='100%'
-            fontSize='xl'
-            href='https://www.buymeacoffee.com/AbhinavRajeshXD'
+              href='https://www.buymeacoffee.com/AbhinavRajeshXD'
             >
-                Buy Me a Coffee
-            </Button>
-        </Flex>
-
-        {/* Mobile */}
-        <IconButton
-          aria-label="Open Menu"
-          size="lg"
-          mr={2}
-          icon={
-            <HamburgerIcon />
-          }
-          onClick={() => changeDisplay('flex')}
-          display={['flex', 'flex', 'none', 'none']}
-        />
-        <Button 
-        colorScheme='pink'
-        as="a"
-        variant="ghost"><Link to='/post'>POST</Link></Button>
-        <Button 
-        colorScheme='pink'
-        as="a"
-        variant="ghost"><Link to='/login'>LOGIN</Link></Button>
-        <Button 
-        colorScheme='pink'
-        as="a"
-        variant="ghost"><Link to='/signup'>SIGN UP</Link></Button>
-        <Switch
-            isChecked={isDark}
-            onChange={toggleColorMode}
-        />
-        
-      </Flex>
-
-      {/* Mobile Content */}
-      <Flex
-        w='100vw'
-        display={display}
-        bgColor="gray.50"
-        zIndex={20}
-        h="100vh"
-        pos="fixed"
-        top="0"
-        left="0"
-        overflowY="auto"
-        flexDir="column"
-      >
-        <Flex justify="flex-end">
+              Buy Me a Coffee
+        </Button>
+          </Flex>
+{isLoggedIn ? (
+              <>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label='Logout'
+                  my={5}
+                  w='20%'
+                  fontSize='xl'
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Link to='/login'>
+                  <ChakraLink>
+                    <Button
+                      colorScheme='pink'
+                      as="a"
+                      variant="ghost">LOGIN</Button></ChakraLink></Link>
+                <Link to='/signup'>
+                  <ChakraLink>
+                    <Button
+                      colorScheme='pink'
+                      as="a"
+                      variant="ghost">SIGN UP</Button></ChakraLink></Link>
+              </>
+            )}
+          {/* Mobile */}
           <IconButton
-            mt={2}
-            mr={2}
             aria-label="Open Menu"
             size="lg"
+            mr={2}
             icon={
-              <CloseIcon />
+              <HamburgerIcon />
             }
-            onClick={() => changeDisplay('none')}
+            onClick={() => changeDisplay('flex')}
+            display={['flex', 'flex', 'none', 'none']}
+          /><Link to='/post'>
+            <ChakraLink>
+              <Button
+                colorScheme='pink'
+                as="a"
+                variant="ghost">POST</Button></ChakraLink></Link>
+          <Switch
+            isChecked={isDark}
+            onChange={toggleColorMode}
           />
+
         </Flex>
 
+        {/* Mobile Content */}
         <Flex
+          w='100vw'
+          display={display}
+          bgColor="gray.50"
+          zIndex={20}
+          h="100vh"
+          pos="fixed"
+          top="0"
+          left="0"
+          overflowY="auto"
           flexDir="column"
-          align="center"
         >
+          <Flex justify="flex-end">
+            <IconButton
+              mt={2}
+              mr={2}
+              aria-label="Open Menu"
+              size="lg"
+              icon={
+                <CloseIcon />
+              }
+              onClick={() => changeDisplay('none')}
+            />
+          </Flex>
+
+          <Flex
+            flexDir="column"
+            align="center"
+          >
 
             <Button
               colorScheme='pink'
@@ -172,7 +208,7 @@ export default function Navbar () {
             </Button>
 
 
-       
+
             <Button
               colorScheme='pink'
               as="a"
@@ -184,9 +220,9 @@ export default function Navbar () {
               Contact
             </Button>
 
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
     </>
   )
 }

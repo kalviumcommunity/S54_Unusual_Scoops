@@ -79,7 +79,10 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-router.post('/api/signup', async (req, res) => {
+router.post('/signup', async (req, res) => {
+  data = req.body
+  const {username,password} = data
+  console.log(data)
   try {
     // Validate user input
     // const { error } = validateSignup(req.body);
@@ -94,12 +97,12 @@ router.post('/api/signup', async (req, res) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
     const newUser = new User({
-      username: req.body.username,
-      password: hashedPassword,
+      username: username,
+      password: hashedPassword, 
     });
 
     // Save the user to the database
@@ -112,7 +115,7 @@ router.post('/api/signup', async (req, res) => {
 });
 
 // Login route
-router.post('/api/login', async (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     // Check if the user exists
     const user = await User.findOne({ username: req.body.username });
