@@ -7,21 +7,41 @@ import {
   Button,
   IconButton,
   Image,
-  Link as ChakraLink
+  Link as ChakraLink,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+  useToast
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
+import Cookies from 'js-cookie'; // Import js-cookie
 
 export default function Navbar() {
   const { colorMode, toggleColorMode } = useColorMode()
   const isDark = colorMode === 'dark'
   const [display, changeDisplay] = useState('none')
-  const [isLoggedIn, setIsLoggedIn] = useState(false) // State to track login status
-
+  const toast = useToast();
   const handleLogout = () => {
     // Implement logout logic here, such as clearing user session, removing tokens, etc.
-    setIsLoggedIn(false)
+    toast({
+      title: 'Logout',
+      description: 'You have been logged out.',
+      status: 'info',
+      duration: 3000,
+      isClosable: true,
+      position: 'top-right'
+    });
+    Cookies.remove('User');
+    // Remove user cookie and reload the page after 1 second
+    setTimeout(() => {
+       // Remove user cookie
+      window.location.reload(); // Reload the page after logout
+    }, 1000);
   }
+
+  const userCookieExists = Cookies.get('User');
 
   return (
     <>
@@ -86,7 +106,8 @@ export default function Navbar() {
                 >
                   Contact
             </Button></ChakraLink></Link>
-            
+
+
             <Button
               colorScheme='pink'
               as="a"
@@ -100,38 +121,30 @@ export default function Navbar() {
               Buy Me a Coffee
         </Button>
           </Flex>
-{isLoggedIn ? (
-              <>
-                <Button
-                  colorScheme='pink'
-                  as="a"
-                  variant="ghost"
-                  aria-label='Logout'
-                  my={5}
-                  w='20%'
-                  fontSize='xl'
-                  onClick={handleLogout}
-                >
-                  Logout
-                </Button>
-              </>
-            ) : (
-              <>
-                <Link to='/login'>
-                  <ChakraLink>
-                    <Button
-                      colorScheme='pink'
-                      as="a"
-                      variant="ghost">LOGIN</Button></ChakraLink></Link>
-                <Link to='/signup'>
-                  <ChakraLink>
-                    <Button
-                      colorScheme='pink'
-                      as="a"
-                      variant="ghost">SIGN UP</Button></ChakraLink></Link>
-              </>
-            )}
-          {/* Mobile */}
+            <Menu>
+              <MenuButton
+                as={Button}
+                colorScheme="pink"
+                variant="ghost"
+                aria-label="Menu"
+                my={5}
+                fontSize='xl'
+              >
+                User
+              </MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <Link to='/login'>Login</Link>
+                </MenuItem>
+                <MenuItem>
+                  <Link to='/signup'>Sign Up</Link>
+                </MenuItem>
+                {userCookieExists && (
+                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                )}
+              </MenuList>
+            </Menu>
+
           <IconButton
             aria-label="Open Menu"
             size="lg"
@@ -141,7 +154,8 @@ export default function Navbar() {
             }
             onClick={() => changeDisplay('flex')}
             display={['flex', 'flex', 'none', 'none']}
-          /><Link to='/post'>
+          />
+          <Link to='/post'>
             <ChakraLink>
               <Button
                 colorScheme='pink'
@@ -206,8 +220,6 @@ export default function Navbar() {
             >
               About
             </Button>
-
-
 
             <Button
               colorScheme='pink'
