@@ -34,6 +34,7 @@ export default function Navbar() {
       position: 'top-right'
     });
     Cookies.remove('User');
+    Cookies.remove('token');
     // Remove user cookie and reload the page after 1 second
     setTimeout(() => {
        // Remove user cookie

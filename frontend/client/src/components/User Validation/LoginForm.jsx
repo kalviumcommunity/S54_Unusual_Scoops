@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 import Joi from 'joi'; // Import Joi
 
 const LoginForm = () => {
-  const [username, setusername] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const toast = useToast();
   const navigate = useNavigate();
@@ -42,7 +42,9 @@ const LoginForm = () => {
     try {
       const response = await axios.post('http://localhost:3000/api/login', { username, password });
       // Handle successful login
-      Cookies.set('User', username); // Set user cookie
+      const { token } = response.data;
+      Cookies.set('token', token); // Store token in cookie
+      Cookies.set('User', username)
       toast({
         title: 'Login successful',
         description: 'You have successfully logged in.',
@@ -52,9 +54,9 @@ const LoginForm = () => {
         position: 'top-right'
       });
       navigate('/');
-      setTimeout(()=>{
+      setTimeout(() => {
         window.location.reload();
-      },1000)
+      }, 1000);
     } catch (error) {
       // Handle login error
       console.error('Login error:', error);
@@ -74,8 +76,8 @@ const LoginForm = () => {
       <FormControl color="black" w={"40vw"} p={"3%"} bgColor={"white"} rounded={"25px"}>
         <Heading color='#b83280' my={"2%"}>Login</Heading>
         <Text>Please Enter the following details</Text>
-        <FormLabel my={"2%"}>username</FormLabel>
-        <Input type="text" value={username} onChange={(e) => setusername(e.target.value)} />
+        <FormLabel my={"2%"}>Username</FormLabel>
+        <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         <FormLabel my={"2%"}>Password</FormLabel>
         <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <Button colorScheme='pink' onClick={handleSubmit}>
@@ -86,13 +88,6 @@ const LoginForm = () => {
             <ArrowBackIcon /> Signup
           </ChakraLink>
         </Link>
-        {Cookies.get('User') && (
-          <Link to='/logout'>
-            <ChakraLink color='#b83280' ml={2} mt={2} display='inline-flex' alignItems='center'>
-              Logout
-            </ChakraLink>
-          </Link>
-        )}
       </FormControl>
     </Flex>
   );
