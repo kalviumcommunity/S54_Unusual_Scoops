@@ -3,6 +3,7 @@ import { FormControl, Input, FormLabel, Button, Heading, Text, Flex, Link as Cha
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie'; 
 import Joi from 'joi'; // Import Joi
 
 const LoginForm = () => {
@@ -19,9 +20,9 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const validation = schema.validate({ username, password }, { abortEarly: false });
-
+  
     if (validation.error) {
       // Handle validation error
       console.error('Validation error:', validation.error);
@@ -37,10 +38,11 @@ const LoginForm = () => {
       });
       return;
     }
-
+  
     try {
       const response = await axios.post('http://localhost:3000/api/login', { username, password });
       // Handle successful login
+      Cookies.set('User', username); // Set user cookie
       toast({
         title: 'Login successful',
         description: 'You have successfully logged in.',
@@ -50,6 +52,9 @@ const LoginForm = () => {
         position: 'top-right'
       });
       navigate('/');
+      setTimeout(()=>{
+        window.location.reload();
+      },1000)
     } catch (error) {
       // Handle login error
       console.error('Login error:', error);
@@ -81,6 +86,13 @@ const LoginForm = () => {
             <ArrowBackIcon /> Signup
           </ChakraLink>
         </Link>
+        {Cookies.get('User') && (
+          <Link to='/logout'>
+            <ChakraLink color='#b83280' ml={2} mt={2} display='inline-flex' alignItems='center'>
+              Logout
+            </ChakraLink>
+          </Link>
+        )}
       </FormControl>
     </Flex>
   );
