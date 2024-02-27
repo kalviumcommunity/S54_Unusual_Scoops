@@ -33,7 +33,7 @@ const Content = () => {
         justifyContent="center"
         mt="14vh"
       >
-        <Text fontSize="8xl" fontFamily="Honk">
+        <Text fontSize="8xl" fontFamily="Honk"  >
           Unusual Scoops
         </Text>
       </Flex>
