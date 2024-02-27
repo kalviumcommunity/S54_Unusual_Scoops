@@ -22,11 +22,16 @@ const scoopsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
 });
 
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
+        unique:true,
         required: true,
     },
     password: {
@@ -50,7 +55,8 @@ const scoopsValidationSchema = Joi.object({
     ingredient: Joi.string().required(),
     origin: Joi.string().required(),
     rating: Joi.number(),
-    image: Joi.string().required()
+    image: Joi.string().required(),
+    username: Joi.string().required()
 });
 
 // Function to validate data using Joi schema

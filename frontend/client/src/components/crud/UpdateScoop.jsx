@@ -53,7 +53,7 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
       });
     }
   };
-  
+
   const handleDelete = async () => {
     try {
       setIsDeleting(true);
@@ -82,56 +82,56 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
       });
     }
   };
-  
 
-  useEffect(()=>{
+
+  useEffect(() => {
     console.log(formData)
-  },[formData])
+  }, [formData])
 
   return (
     <>
       <Box
-  bg="#ff5f96"
-  width="20vw"
-  borderRadius="50px"
-  padding="2vw"
-  boxShadow="#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px"
-  border="6px solid black"
-  position="relative"
-  overflow="hidden"
-  _hover={{
-    
-    '.update-delete-buttons': {
-      opacity: 1,
-    }
-  }}
->
+        bg="#ff5f96"
+        width="20vw"
+        borderRadius="50px"
+        padding="2vw"
+        boxShadow="#ffee6e -13px 8px 0 2px,black -13px 8px 0 8px"
+        border="6px solid black"
+        position="relative"
+        overflow="hidden"
+        _hover={{
 
-  {scoop.image && <Image src={scoop.image} borderRadius="25px" width="15vw" height="25vh" />}
-  <br />
-  <Text fontSize="20px" as="b">
-    {scoop.name}
-  </Text> <br />
-  <Text fontSize="18px" as="b">
-    Origin: {scoop.origin}
-  </Text>
-  <Flex>
-    <img src={ratingImg} width='40px'/>
-    <Text fontSize="30px" as="b">
-      {scoop.rating}
-    </Text> 
-    </Flex>
-  <Flex align="center" justifyContent='space-between' mt="2" position="absolute" bottom="350" left="50%" transform="translateX(-50%)" className="update-delete-buttons" opacity={0} transition="opacity 0.3s ease-in-out" width='14vw'>
-    {!isUpdating && !isDeleting ? (
-      <>
-        <Button colorScheme="blue" onClick={() => setIsOpen(true)} disabled={isDeleting}>Update</Button>
-        <Button onClick={handleDelete} colorScheme="red" disabled={isUpdating}>Delete</Button>
-      </>
-    ) : (
-      <Text>{isUpdating ? 'Updating...' : 'Deleting...'}</Text>
-    )}
-  </Flex>
-</Box>
+          '.update-delete-buttons': {
+            opacity: 1,
+          }
+        }}
+      >
+
+        {scoop.image && <Image src={scoop.image} borderRadius="25px" width="15vw" height="25vh" />}
+        <br />
+        <Text fontSize="20px" as="b">
+          {scoop.name}
+        </Text> <br />
+        <Text fontSize="18px" as="b">
+          Origin: {scoop.origin}
+        </Text>
+        <Flex>
+        <img src={ratingImg} width='40px' />
+        <Text fontSize="30px" as="b">
+          {scoop.rating}
+        </Text>
+      </Flex>
+      <Flex align="center" justifyContent='space-between' mt="2" position="absolute" bottom="350" left="50%" transform="translateX(-50%)" className="update-delete-buttons" opacity={0} transition="opacity 0.3s ease-in-out" width='14vw'>
+        {!isUpdating && !isDeleting ? (
+          <>
+            <Button colorScheme="blue" onClick={() => setIsOpen(true)} disabled={isDeleting}>Update</Button>
+            <Button onClick={handleDelete} colorScheme="red" disabled={isUpdating}>Delete</Button>
+          </>
+        ) : (
+          <Text>{isUpdating ? 'Updating...' : 'Deleting...'}</Text>
+        )}
+      </Flex>
+    </Box >
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalOverlay />
         <ModalContent>

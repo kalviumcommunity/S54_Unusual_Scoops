@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const { Scoop, User, validateScoop, validateSignup } = require('./Schema');
 
 // Get all Scoops
-router.get('/', async (req, res) => {
+router.get('/datas', async (req, res) => {
   try {
     const scoops = await Scoop.find(); // Change variable name from Scoops to scoops
     console.log(scoops);
@@ -16,13 +16,15 @@ router.get('/', async (req, res) => {
 });
 
 // Get a single Scoop
-router.get('/:id', async (req, res) => {
+router.get('/datas/:username', async (req, res) => {
   try {
-    const scoop = await Scoop.findById(req.params.id); // Change variable name from Scoop to scoop
+    const username = req.params.username;
+    // console.log(username)
+    const scoop = await Scoop.find({username}); // Change variable name from Scoop to scoop
     if (!scoop) {
       return res.status(404).json({ error: 'Scoop not found' });
     }
-    res.json(scoop);
+    res.json({scoop});
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -37,6 +39,7 @@ router.post('/', async (req, res) => {
       origin: req.body.origin,
       rating: req.body.rating,
       image: req.body.image,
+      username: req.body.username
     });
 
     const savedScoop = await newScoop.save(); // Change variable name from s1 to savedScoop
@@ -111,6 +114,15 @@ router.post('/signup', async (req, res) => {
     res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await User.find(); 
+    res.json(users);
+  } catch (error) {
+    res.json({ error: error.message });
   }
 });
 

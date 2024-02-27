@@ -36,7 +36,7 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/signup', {
+      const response = await axios.post('https://unusualscoops.onrender.com/api/signup', {
         username,
         password,
       }, {
