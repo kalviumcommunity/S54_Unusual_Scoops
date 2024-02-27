@@ -11,7 +11,7 @@ const Content = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('https://unusualscoops.onrender.com/api');
+      const response = await axios.get('https://unusualscoops.onrender.com/api/datas');
       setScoops(response.data);
     } catch (error) {
       console.error(error);
@@ -37,6 +37,7 @@ const Content = () => {
           Unusual Scoops
         </Text>
       </Flex>
+      {/* Remove the user selection section */}
       <Flex
         width="100%"
         top="1rem"
@@ -47,9 +48,10 @@ const Content = () => {
         marginBottom="5rem"
       >
         <SimpleGrid columns={3} spacingX="15vw" spacingY="15vh">
-        {scoops.map((scoop, index) => (
-      <UpdateDeleteScoop key={scoop._id} scoop={scoop} onUpdate={fetchData} onDelete={fetchData} />
-        ))}
+          {/* Render scoops */}
+          {scoops.map((scoop, index) => (
+            <UpdateDeleteScoop key={scoop._id} scoop={scoop} onUpdate={fetchData} onDelete={fetchData} />
+          ))}
         </SimpleGrid>
       </Flex>
     </>

@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import logo from '../../Assets/1996511.png'
+import { useState } from 'react';
+import logo from '../../Assets/1996511.png';
 import {
   useColorMode,
   Switch,
@@ -13,18 +13,18 @@ import {
   MenuList,
   MenuItem,
   useToast
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-import { Link } from 'react-router-dom'
-import Cookies from 'js-cookie'; // Import js-cookie
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export default function Navbar() {
-  const { colorMode, toggleColorMode } = useColorMode()
-  const isDark = colorMode === 'dark'
-  const [display, changeDisplay] = useState('none')
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDark = colorMode === 'dark';
+  const [display, changeDisplay] = useState('none');
   const toast = useToast();
+
   const handleLogout = () => {
-    // Implement logout logic here, such as clearing user session, removing tokens, etc.
     toast({
       title: 'Logout',
       description: 'You have been logged out.',
@@ -35,14 +35,28 @@ export default function Navbar() {
     });
     Cookies.remove('User');
     Cookies.remove('token');
-    // Remove user cookie and reload the page after 1 second
     setTimeout(() => {
-       // Remove user cookie
-      window.location.reload(); // Reload the page after logout
+      window.location.reload();
     }, 1000);
-  }
+  };
 
   const userCookieExists = Cookies.get('User');
+
+  const handlePostClick = (event) => {
+    if (!userCookieExists) {
+      event.preventDefault();
+      toast({
+        title: 'Unauthorized',
+        description: 'You need to login to access this feature.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right'
+      });
+    } else {
+      // Navigate to the post page
+    }
+  };
 
   return (
     <>
@@ -55,11 +69,7 @@ export default function Navbar() {
           justifyContent={'space-between'}
           right='2rem'
         >
-          <Image src={logo}
-            boxSize={'20'}
-            ml='8'
-          />
-          {/* Desktop */}
+          <Image src={logo} boxSize={'20'} ml='8' />
           <Flex
             display={['none', 'none', 'flex', 'flex']}
             width='50vw'
@@ -77,8 +87,9 @@ export default function Navbar() {
                   fontSize='xl'
                 >
                   Home
-            </Button></ChakraLink></Link>
-
+                </Button>
+              </ChakraLink>
+            </Link>
 
             <Link to="/about">
               <ChakraLink>
@@ -92,7 +103,9 @@ export default function Navbar() {
                   fontSize='xl'
                 >
                   About
-            </Button></ChakraLink></Link>
+                </Button>
+              </ChakraLink>
+            </Link>
             <Link to='/contact'>
               <ChakraLink>
                 <Button
@@ -103,11 +116,25 @@ export default function Navbar() {
                   my={5}
                   w="100%"
                   fontSize='xl'
-
                 >
                   Contact
-            </Button></ChakraLink></Link>
-
+                </Button>
+              </ChakraLink>
+            </Link>
+            <Link to='filteredcontent'>
+              <ChakraLink>
+                <Button
+                colorScheme='pink'
+                as="a"
+                variant="ghost"
+                aria-label="Contact"
+                my={5}
+                w="100%"
+                fontSize='xl'>
+                  Filter
+                </Button>
+              </ChakraLink>
+            </Link>
 
             <Button
               colorScheme='pink'
@@ -120,56 +147,58 @@ export default function Navbar() {
               href='https://www.buymeacoffee.com/AbhinavRajeshXD'
             >
               Buy Me a Coffee
-        </Button>
+            </Button>
           </Flex>
-            <Menu>
-              <MenuButton
-                as={Button}
-                colorScheme="pink"
-                variant="ghost"
-                aria-label="Menu"
-                my={5}
-                fontSize='xl'
-              >
-                User
-              </MenuButton>
-              <MenuList>
-                <MenuItem>
-                  <Link to='/login'>Login</Link>
-                </MenuItem>
-                <MenuItem>
-                  <Link to='/signup'>Sign Up</Link>
-                </MenuItem>
-                {userCookieExists && (
-                  <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                )}
-              </MenuList>
-            </Menu>
+
+          <Menu>
+            <MenuButton
+              as={Button}
+              colorScheme="pink"
+              variant="ghost"
+              aria-label="Menu"
+              my={5}
+              fontSize='xl'
+            >
+              User
+            </MenuButton>
+            <MenuList>
+              <MenuItem>
+                <Link to='/login'>Login</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link to='/signup'>Sign Up</Link>
+              </MenuItem>
+              {userCookieExists && (
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              )}
+            </MenuList>
+          </Menu>
 
           <IconButton
             aria-label="Open Menu"
             size="lg"
             mr={2}
-            icon={
-              <HamburgerIcon />
-            }
+            icon={<HamburgerIcon />}
             onClick={() => changeDisplay('flex')}
             display={['flex', 'flex', 'none', 'none']}
           />
-          <Link to='/post'>
+          <Link to='/post' onClick={handlePostClick}>
             <ChakraLink>
               <Button
                 colorScheme='pink'
                 as="a"
-                variant="ghost">POST</Button></ChakraLink></Link>
+                variant="ghost"
+              >
+                POST
+              </Button>
+            </ChakraLink>
+          </Link>
           <Switch
             isChecked={isDark}
             onChange={toggleColorMode}
           />
-
         </Flex>
 
-        {/* Mobile Content */}
         <Flex
           w='100vw'
           display={display}
@@ -188,9 +217,7 @@ export default function Navbar() {
               mr={2}
               aria-label="Open Menu"
               size="lg"
-              icon={
-                <CloseIcon />
-              }
+              icon={<CloseIcon />}
               onClick={() => changeDisplay('none')}
             />
           </Flex>
@@ -199,7 +226,6 @@ export default function Navbar() {
             flexDir="column"
             align="center"
           >
-
             <Button
               colorScheme='pink'
               as="a"
@@ -232,10 +258,9 @@ export default function Navbar() {
             >
               Contact
             </Button>
-
           </Flex>
         </Flex>
       </Flex>
     </>
-  )
+  );
 }

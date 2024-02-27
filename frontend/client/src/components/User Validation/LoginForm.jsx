@@ -40,10 +40,10 @@ const LoginForm = () => {
     }
   
     try {
-      const response = await axios.post('http://localhost:3000/api/login', { username, password });
+      const response = await axios.post('https://unusualscoops.onrender.com/api/login', { username, password });
       // Handle successful login
       const { token } = response.data;
-      Cookies.set('token', token); // Store token in cookie
+      Cookies.set('token', token);
       Cookies.set('User', username)
       toast({
         title: 'Login successful',
@@ -58,7 +58,6 @@ const LoginForm = () => {
         window.location.reload();
       }, 1000);
     } catch (error) {
-      // Handle login error
       console.error('Login error:', error);
       toast({
         title: 'Login failed',

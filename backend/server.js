@@ -7,10 +7,7 @@ const port = process.env.PORT || 3000;
 const cors = require('cors')
 
 app.use(express.json());
-app.use(cors({
-    methods:  ['GET', 'POST', 'PUT', 'DELETE'],
-}
-))
+app.use(cors())
 
 DBconnection().then(() => {
     console.log("Database Connected")

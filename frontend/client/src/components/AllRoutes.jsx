@@ -9,6 +9,7 @@ import InsertScoop from './crud/InsertScoop'
 import UpdateScoop from './crud/UpdateScoop'
 import LoginForm from './User Validation/LoginForm.jsx'
 import SignupForm from './User Validation/Signup'
+import FilteredContent from './Content/FilteredContent.jsx'
 
 
 const AllRoutes = () => {
@@ -23,6 +24,7 @@ const AllRoutes = () => {
             <Route path='/update' element={<UpdateScoop />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/signup' element={<SignupForm />} />
+            <Route path='/filteredcontent' element={<FilteredContent />} />
         </Routes>
     </>
   )
