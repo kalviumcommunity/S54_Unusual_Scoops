@@ -71,7 +71,7 @@ export default function Navbar() {
         >
           <Image src={logo} boxSize={'20'} ml='8' />
           <Flex
-            display={['none', 'none', 'flex', 'flex']}
+            display={['none', 'none', 'none', 'flex', 'flex']}
             width='50vw'
             justifyContent='space-between'
           >
@@ -180,7 +180,7 @@ export default function Navbar() {
             mr={2}
             icon={<HamburgerIcon />}
             onClick={() => changeDisplay('flex')}
-            display={['flex', 'flex', 'none', 'none']}
+            display={['flex', 'flex', 'flex', 'none', 'none']}
           />
           <Link to='/post' onClick={handlePostClick}>
             <ChakraLink>
@@ -226,37 +226,80 @@ export default function Navbar() {
             flexDir="column"
             align="center"
           >
-            <Button
-              colorScheme='pink'
-              as="a"
-              variant="ghost"
-              aria-label="Home"
-              my={5}
-              w="100%"
-            >
-              Home
-            </Button>
+            <Link to='/'>
+              <ChakraLink>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label="Home"
+                  my={5}
+                  w="100%"
+                  fontSize='xl'
+                >
+                  Home
+                </Button>
+              </ChakraLink>
+            </Link>
+
+            <Link to="/about">
+              <ChakraLink>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label="About"
+                  my={5}
+                  w="100%"
+                  fontSize='xl'
+                >
+                  About
+                </Button>
+              </ChakraLink>
+            </Link>
+
+            <Link to='/contact'>
+              <ChakraLink>
+                <Button
+                  colorScheme='pink'
+                  as="a"
+                  variant="ghost"
+                  aria-label="Contact"
+                  my={5}
+                  w="100%"
+                  fontSize='xl'
+                >
+                  Contact
+                </Button>
+              </ChakraLink>
+            </Link>
+
+            <Link to='filteredcontent'>
+              <ChakraLink>
+                <Button
+                colorScheme='pink'
+                as="a"
+                variant="ghost"
+                aria-label="Contact"
+                my={5}
+                w="100%"
+                fontSize='xl'>
+                  Filter
+                </Button>
+              </ChakraLink>
+            </Link>
 
             <Button
               colorScheme='pink'
               as="a"
               variant="ghost"
-              aria-label="About"
+              aria-label='contact'
               my={5}
-              w="100%"
+              w='20%'
+              fontSize='xl'
+              href='https://www.buymeacoffee.com/AbhinavRajeshXD'
             >
-              About
-            </Button>
-
-            <Button
-              colorScheme='pink'
-              as="a"
-              variant="ghost"
-              aria-label="Contact"
-              my={5}
-              w="100%"
-            >
-              Contact
+              Buy Me a Coffee
             </Button>
           </Flex>
         </Flex>
