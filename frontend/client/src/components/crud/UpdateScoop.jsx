@@ -17,6 +17,10 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
   });
   const toast = useToast();
 
+  const userCookie = document.cookie;
+  const usernameFromCookie = userCookie ? userCookie.split(';').find(cookie => cookie.trim().startsWith('User=')).split('=')[1] : null;
+  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -83,10 +87,14 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
     }
   };
 
-
   useEffect(() => {
     console.log(formData)
   }, [formData])
+
+  const canPerformAction = () => {
+    // Check if username from cookie matches scoop's username
+    return scoop.username === usernameFromCookie;
+  };
 
   return (
     <>
@@ -100,13 +108,11 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
         position="relative"
         overflow="hidden"
         _hover={{
-
           '.update-delete-buttons': {
             opacity: 1,
           }
         }}
       >
-
         {scoop.image && <Image src={scoop.image} borderRadius="25px" width="15vw" height="25vh" />}
         <br />
         <Text fontSize="20px" as="b">
@@ -116,22 +122,35 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
           Origin: {scoop.origin}
         </Text>
         <Flex>
-        <img src={ratingImg} width='40px' />
-        <Text fontSize="30px" as="b">
-          {scoop.rating}
-        </Text>
-      </Flex>
-      <Flex align="center" justifyContent='space-between' mt="2" position="absolute" bottom="350" left="50%" transform="translateX(-50%)" className="update-delete-buttons" opacity={0} transition="opacity 0.3s ease-in-out" width='14vw'>
-        {!isUpdating && !isDeleting ? (
-          <>
-            <Button colorScheme="blue" onClick={() => setIsOpen(true)} disabled={isDeleting}>Update</Button>
-            <Button onClick={handleDelete} colorScheme="red" disabled={isUpdating}>Delete</Button>
-          </>
-        ) : (
-          <Text>{isUpdating ? 'Updating...' : 'Deleting...'}</Text>
-        )}
-      </Flex>
-    </Box >
+          <img src={ratingImg} width='40px' />
+          <Text fontSize="30px" as="b">
+            {scoop.rating}
+          </Text>
+        </Flex>
+        <Flex align="center" justifyContent='space-between' mt="2" position="absolute" bottom="350" left="50%" transform="translateX(-50%)" className="update-delete-buttons" opacity={0} transition="opacity 0.3s ease-in-out" width='14vw'>
+          {canPerformAction() ? (
+            !isUpdating && !isDeleting ? (
+              <>
+                <Button colorScheme="blue" onClick={() => setIsOpen(true)} disabled={isDeleting}>Update</Button>
+                <Button onClick={handleDelete} colorScheme="red" disabled={isUpdating}>Delete</Button>
+              </>
+            ) : (
+              <Text>{isUpdating ? 'Updating...' : 'Deleting...'}</Text>
+            )
+          ) : (
+            <Button colorScheme="red" onClick={() => {
+              toast({
+                position: 'top-right',
+                title: 'Unauthorized',
+                description: 'Action restricted',
+                status: 'error',
+                duration: 3000,
+                isClosable: true,
+              });
+            }}>Unauthorized</Button>
+          )}
+        </Flex>
+      </Box >
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <ModalOverlay />
         <ModalContent>
@@ -159,7 +178,6 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
               <Input type="text" name="image" value={formData.image} onChange={handleChange} />
             </FormControl>
           </ModalBody>
-
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={handleUpdate} isLoading={isUpdating}>
               Save

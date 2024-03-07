@@ -25,19 +25,31 @@ export default function Navbar() {
   const toast = useToast();
 
   const handleLogout = () => {
-    toast({
-      title: 'Logout',
-      description: 'You have been logged out.',
-      status: 'info',
-      duration: 3000,
-      isClosable: true,
-      position: 'top-right'
-    });
-    Cookies.remove('User');
-    Cookies.remove('token');
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    const currentPathname = window.location.pathname;
+    if (currentPathname === '/post') {
+      toast({
+        title: 'Restricted Action',
+        description: 'Please go to the home page to logout.',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right'
+      });
+    } else {
+      toast({
+        title: 'Logout',
+        description: 'You have been logged out.',
+        status: 'info',
+        duration: 3000,
+        isClosable: true,
+        position: 'top-right'
+      });
+      Cookies.remove('User');
+      Cookies.remove('token');
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }
   };
 
   const userCookieExists = Cookies.get('User');
