@@ -10,7 +10,7 @@
   "name": "Wasabi Ice Cream",
   "ingredient": "Wasabi",
   "origin": "Japan",
-  "rating": 6,
+  "rating": 5,
   "image": "https://preview.redd.it/9efanmpbvpp61.jpg?auto=webp&s=3b0684fd9483fc8961bd0cff20f33d9798c2f02c",
   "username": "Admin"
 },
@@ -18,7 +18,7 @@
   "name": "Bacon Maple Ice Cream",
   "ingredient": "Bacon bits, Maple Syrup",
   "origin": "USA",
-  "rating": 7,
+  "rating": 5,
   "image": "https://img.sndimg.com/food/image/upload/q_92,fl_progressive,w_1200,c_scale/v1/img/recipes/35/99/86/nuhBxHeSOG9JNGcuByCv_IMG_4167%20maple%20bacon%20ice%20cream.jpg",
   "username": "Admin"
 },
@@ -26,7 +26,7 @@
   "name": "Lavender Honey Ice Cream",
   "ingredient": "Lavender Extract, Honey",
   "origin": "France",
-  "rating": 9,
+  "rating": 5,
   "image": "https://thepolkadotter.com/wp-content/uploads/2023/02/Honey-Lavender-Ice-Cream-9-sq-crop.jpg",
   "username": "Admin"
 },
@@ -34,7 +34,7 @@
   "name": "Durian Ice Cream",
   "ingredient": "Durian Chunks",
   "origin": "Malaysia",
-  "rating": 8,
+  "rating": 5,
   "image": "https://www.thespruceeats.com/thmb/xelwSSdQ-Wt0GV_3B98g3ZGE5vs=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/durian-ice-cream-694424-7937ac06874346fdb6482f87946f364b.jpg",
   "username": "Cross"
 },
@@ -42,7 +42,7 @@
   "name": "Charcoal Ice Cream",
   "ingredient": "Charcoal",
   "origin": "Japan",
-  "rating": 7,
+  "rating": 5,
   "image": "https://www.shape.com/thmb/5bLMoEJv0e7Z9mjmZLaOsZkrfOA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/shutterstock_363973853_0-875a16a0046d42b4ad5a3d88452789f1.jpg",
   "username": "Cross"
 },
@@ -50,7 +50,7 @@
   "name": "Balsamic Strawberry Basil Ice Cream",
   "ingredient": "Balsamic Vinegar, fresh Strawberry, fresh Basil",
   "origin": "Italy",
-  "rating": 8,
+  "rating": 5,
   "image": "https://www.teawithmum.com/wp-content/uploads/2020/06/Basil-ice-cream-title-shot.png",
   "username": "Cross"
 },
@@ -58,7 +58,7 @@
   "name": "Saffron Cardamom Rose Ice Cream",
   "ingredient": "Saffron Threads, cardamom, rose water",
   "origin": "Middle East/India",
-  "rating": 9,
+  "rating": 5,
   "image": "https://d1fm27ee7pjs8v.cloudfront.net/images/thumbnails/1000/posts/original/img_55c154250dbba.jpg",
   "username": "Cross"
 },
@@ -66,7 +66,7 @@
   "name": "Everything Bagel Ice Cream",
   "ingredient": "Bagel",
   "origin": "USA",
-  "rating": 8,
+  "rating": 5,
   "image": "https://cdn.vox-cdn.com/thumbor/Ixh1_-Z3U1cSTZZyEsgvc0dy5-w=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/22258586/Esl8HaeXAAAMoQH.jpeg",
   "username": "Cross"
 },
@@ -74,7 +74,7 @@
   "name": "Paan Ice Cream",
   "ingredient": "Paan",
   "origin": "Kolkata, India",
-  "rating": 6.5,
+  "rating": 5,
   "image": "https://www.amiicecream.in/wp-content/uploads/2020/05/paan.jpg",
   "username": "nexalus"
 },
@@ -82,7 +82,7 @@
   "name": "Horse Meat Ice Cream",
   "ingredient": "Horse Meat",
   "origin": "Japan",
-  "rating": 6,
+  "rating": 5,
   "image": "https://4.bp.blogspot.com/-eoyTCfvyCTs/T-g5LcnXopI/AAAAAAAAALc/ZGg_iUF5ZyE/s1600/slide_212503_752982_free.jpg",
   "username": "Admin"
 }]
