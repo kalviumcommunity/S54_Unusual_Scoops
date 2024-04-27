@@ -17,9 +17,24 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
   });
   const toast = useToast();
 
-  const userCookie = document.cookie;
-  const usernameFromCookie = userCookie ? userCookie.split(';').find(cookie => cookie.trim().startsWith('User=')).split('=')[1] : null;
-  
+  const userCookie = typeof document !== 'undefined' ? document.cookie : null;
+  let usernameFromCookie;
+  if (userCookie) {
+    const cookieParts = userCookie.split(';');
+    const userCookiePair = cookieParts.find(cookie => cookie.trim().startsWith('User='));
+    if (userCookiePair) {
+      const value = userCookiePair.split('=')[1];
+      if (value) {
+        usernameFromCookie = value;
+      } else {
+        console.error('Error: User cookie value is empty');
+      }
+    } else {
+      console.error('Error: User cookie pair not found');
+    }
+  } else {
+    console.error('Error: User cookie is empty');
+  }    
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +107,7 @@ const UpdateDeleteScoop = ({ scoop, onUpdate, onDelete }) => {
   }, [formData])
 
   const canPerformAction = () => {
-    // Check if username from cookie matches scoop's username
+
     return scoop.username === usernameFromCookie;
   };
 

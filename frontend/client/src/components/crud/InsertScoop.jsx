@@ -33,7 +33,7 @@ const InsertScoop = () => {
   const [user, setUser] = useState('');
 
   useEffect(() => {
-    // Function to get the value of 'User' cookie
+
     const getUserFromCookie = () => {
       const cookies = document.cookie.split(';');
       for (let cookie of cookies) {
@@ -45,7 +45,7 @@ const InsertScoop = () => {
       return null;
     };
 
-    // Set the 'user' state with the value of 'User' cookie
+
     setUser(getUserFromCookie());
   }, []);
 

@@ -17,22 +17,22 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Select, // Import Select component from Chakra UI
+  Select,
 } from '@chakra-ui/react';
 import ratingImg from '../../Assets/ratingIcon.png';
 import { useToast } from '@chakra-ui/react';
 
 const FilteredContent = () => {
   const [scoops, setScoops] = useState([]);
-  const [users, setUsers] = useState([]); // State to store list of users
-  const [selectedUser, setSelectedUser] = useState(''); // State to store selected user
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({});
   const toast = useToast();
 
-  // Fetch users data
+
   const fetchUsers = async () => {
     try {
       const response = await axios.get('https://unusualscoops.onrender.com/api/users');
@@ -42,7 +42,6 @@ const FilteredContent = () => {
     }
   };
 
-  // Fetch scoops data
   const fetchData = async () => {
     try {
       const response = await axios.get('https://unusualscoops.onrender.com/api/datas');
@@ -53,8 +52,8 @@ const FilteredContent = () => {
   };
 
   useEffect(() => {
-    fetchData(); // Fetch data when the component mounts
-    fetchUsers(); // Fetch users when the component mounts
+    fetchData();
+    fetchUsers();
   }, []);
 
   const handleChange = (e) => {
@@ -120,7 +119,7 @@ const FilteredContent = () => {
     }
   };
 
-  // Filter scoops based on selected user
+
   const filteredScoops = selectedUser ? scoops.filter(scoop => scoop.username === selectedUser) : scoops;
 
   return (
@@ -139,7 +138,7 @@ const FilteredContent = () => {
         </Text>
       </Flex>
       <Text textAlign='center' fontFamily='kanit' fontSize='5xl'>Filter By User Submission</Text>
-      {/* Dropdown menu to select users */}
+
       <Select value={selectedUser} onChange={handleChange} placeholder="Select User" mt='2%' w='50%' border='5px solid black' borderRadius='50px' ml='25%' h='7vh'>
         {users.map(user => (
           <option key={user.id} value={user.username}>{user.username}</option>
